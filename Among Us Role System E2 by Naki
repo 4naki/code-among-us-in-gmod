@@ -5,11 +5,21 @@
 
 if(first()){
     Players=players()
-    timer("susfinder",100)
     
     Crewmates=array()
     Impostors=array()
     
+    timer("start",500)
+}
+
+if(clk("start")){
+    if(Impostor1&Impostor2){
+        
+    }else{
+    
+        timer("susfinder",500)
+        
+    }
 }
 
 if(clk("susfinder")){
@@ -17,13 +27,14 @@ Rand1=randint(1,Players:count())
 Rand2=randint(1,Players:count())
 
 Val1=Rand1
+
 if(Rand2==Rand1){
     if(Rand1>Players:count()-2){
-    Val2=Rand2-1
+        Val2=Rand2-1
     }elseif(Rand1<3){
-    Val2=Rand2+1
+        Val2=Rand2+1
     }else{
-    Val2=Rand2+randint(1,3)|-randint(1,3)
+        Val2=Rand2+randint(1,3)|-randint(1,3)
     }
 }else{
     Val2=Rand2
@@ -40,4 +51,8 @@ foreach(I,E:entity=Players){
         Impostors:pushEntity(E)
     }
 }
+#recheck (most likely not even needed but just in case)
+timer("start",500)
 }
+
+
