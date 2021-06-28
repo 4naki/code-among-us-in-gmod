@@ -1,8 +1,8 @@
 @name Among Us Role System
-@persist Players:array BaseVal Impostor1:entity Impostor2:entity Rand1 Rand2
+@persist Players:array BaseVal Impostor1:entity Impostor2:entity Rand1 Rand2 Val1 Val2
 #teams
 @persist Crewmates:array Impostors:array
-
+interval(250)
 if(first()){
     Players=players()
     
@@ -15,10 +15,21 @@ if(first()){
 if(clk("start")){
     if(Impostor1&Impostor2){
         
+        #debug
+        ##[
+        printTable(Crewmates)
+        printTable(Impostors)
+        #]#
     }else{
     
         timer("susfinder",500)
         
+        #debug
+        ##[
+        print("selecting sussy people")
+        print(Val1)
+        print(Val2)
+        #]#
     }
 }
 
