@@ -1,8 +1,15 @@
 @name Among Us Role System
 @persist Players:array BaseVal Impostor1:entity Impostor2:entity Rand1 Rand2
+#teams
+@persist Crewmates:array Impostors:array
+
 if(first()){
     Players=players()
     timer("susfinder",100)
+    
+    Crewmates=array()
+    Impostors=array()
+    
 }
 
 if(clk("susfinder")){
@@ -27,10 +34,10 @@ Impostor2=Players[Val2,entity]
 foreach(I,E:entity=Players){
     if(!(E==Impostor1|E==Impostor2)){
         #Crewmate
-        
+        Crewmates:pushEntity(E)
     }else{
         #Impostor
-        
+        Impostors:pushEntity(E)
     }
 }
 }
