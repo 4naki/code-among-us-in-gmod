@@ -62,8 +62,6 @@ foreach(I,E:entity=Players){
         Impostors:pushEntity(E)
     }
 }
-#recheck (most likely not even needed but just in case)
+#recheck (doesn't find anything at first check, this fixes it for now, and simply just works as a recheck)
 timer("start",500)
 }
-
-
