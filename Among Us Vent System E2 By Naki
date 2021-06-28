@@ -1,0 +1,225 @@
+@name Among Us Vent System
+@inputs [Vent1 Vent2 Vent3]:entity
+@persist Val1 Val2 Val3 Open1 Open2 Open3 Close1 Close2 Close3 Size
+
+interval(100)
+if(first()){
+    timer("hc",100)
+    
+    Size=1.5
+    
+}
+if(clk("hc")){        
+        holoCreate(1)
+        holoPos(1,Vent1:toWorld(vec(0,0,0)))
+        holoAng(1,Vent1:toWorld(ang(0,0,0)))
+        holoParent(1,Vent1)
+
+        holoModel(1, "models/sprops/rectangles/size_2_5/rect_18x18x3.mdl")
+        holoMaterial(1, "models/debug/debugwhite")
+        holoColor(1, vec(0))
+
+        holoCreate(2)
+        holoPos(2,holoEntity(1):toWorld(vec(8*Size,0*Size,1.5*Size/2)))
+        holoAng(2,holoEntity(1):toWorld(ang(0,0,0)))
+
+        holoCreate(3)
+        holoPos(3,holoEntity(2):toWorld(vec(-8*Size,0*Size,1.5*Size/2)))
+        holoAng(3,holoEntity(2):toWorld(ang(0,0,0)))
+
+        holoModel(3, "models/sprops/rectangles/size_2_5/rect_18x18x3.mdl")
+        holoMaterial(3, "models/debug/debugwhite")
+        holoColor(3, vec(255))
+        holoParent(3,holoEntity(2))
+
+        holoCreate(4)
+        holoPos(4,Vent2:toWorld(vec(0,0,0)))
+        holoAng(4,Vent2:toWorld(ang(0,0,0)))
+        holoParent(4,Vent2)
+
+        holoModel(4, "models/sprops/rectangles/size_2_5/rect_18x18x3.mdl")
+        holoMaterial(4, "models/debug/debugwhite")
+        holoColor(4, vec(0))
+
+        holoCreate(5)
+        holoPos(5,holoEntity(4):toWorld(vec(8*Size,0*Size,1.5*Size/2)))
+        holoAng(5,holoEntity(4):toWorld(ang(0,0,0)))
+
+        holoCreate(6)
+        holoPos(6,holoEntity(5):toWorld(vec(-8*Size,0*Size,1.5*Size/2)))
+        holoAng(6,holoEntity(5):toWorld(ang(0,0,0)))
+
+        holoModel(6, "models/sprops/rectangles/size_2_5/rect_18x18x3.mdl")
+        holoMaterial(6, "models/debug/debugwhite")
+        holoColor(6, vec(255))
+        holoParent(6,holoEntity(5))
+
+        holoCreate(7)
+        holoPos(7,Vent3:toWorld(vec(0,0,0)))
+        holoAng(7,Vent3:toWorld(ang(0,0,0)))
+        holoParent(7,Vent3)
+
+        holoModel(7, "models/sprops/rectangles/size_2_5/rect_18x18x3.mdl")
+        holoMaterial(7, "models/debug/debugwhite")
+        holoColor(7, vec(0))
+
+        holoCreate(8)
+        holoPos(8,holoEntity(7):toWorld(vec(8*Size,0*Size,1.5*Size/2)))
+        holoAng(8,holoEntity(7):toWorld(ang(0,0,0)))        
+
+        holoCreate(9)
+        holoPos(9,holoEntity(8):toWorld(vec(-8*Size,0*Size,1.5*Size/2)))
+        holoAng(9,holoEntity(8):toWorld(ang(0,0,0)))
+        
+        holoModel(9, "models/sprops/rectangles/size_2_5/rect_18x18x3.mdl")
+        holoMaterial(9, "models/debug/debugwhite")
+        holoColor(9, vec(255))
+        holoParent(9,holoEntity(8))
+
+        for(I=1,9){
+            holoScale(I,vec(1*Size,1*Size,1*Size/2))
+        }
+        holoAlpha(2,0)
+        holoAlpha(5,0)
+        holoAlpha(8,0)
+        
+}
+foreach(I,E:entity=players()){
+    #Vent1
+    if(E:shootPos():distance(Vent1:pos())<70){
+        if(changed(E:keyJump())&E:keyJump()){
+            E:plySetPos(Vent1:toWorld(vec(0,0,0))+vec(0,0,20))
+        }
+        if(changed(E:keySprint())&E:keySprint()){
+            E:plySetPos(Vent1:toWorld(vec(0,0,0))+vec(0,0,-80))
+        }
+        if(changed(E:keyJump()||E:keySprint())&E:keyJump()||E:keySprint()){
+            timer("open1",100)
+        }
+    }
+    if(E:shootPos():distance(Vent1:pos())<20){
+        if(changed(E:keyRight())&E:keyRight()){
+            E:plySetPos(Vent2:toWorld(vec(0,0,0))+vec(0,0,-80))
+        }
+        if(changed(E:keyLeft())&E:keyLeft()){
+            E:plySetPos(Vent3:toWorld(vec(0,0,0))+vec(0,0,-80))
+        }
+    }
+    
+    #Vent2
+    if(E:shootPos():distance(Vent2:pos())<70){
+        if(changed(E:keyJump())&E:keyJump()){
+            E:plySetPos(Vent2:toWorld(vec(0,0,0))+vec(0,0,20))
+        }
+        if(changed(E:keySprint())&E:keySprint()){
+            E:plySetPos(Vent2:toWorld(vec(0,0,0))+vec(0,0,-80))
+        }
+        if(changed(E:keyJump()||E:keySprint())&E:keyJump()||E:keySprint()){
+            timer("open2",100)
+        }
+    }
+    if(E:shootPos():distance(Vent2:pos())<20){
+        if(changed(E:keyRight())&E:keyRight()){
+            E:plySetPos(Vent3:toWorld(vec(0,0,0))+vec(0,0,-80))
+        }
+        if(changed(E:keyLeft())&E:keyLeft()){
+            E:plySetPos(Vent1:toWorld(vec(0,0,0))+vec(0,0,-80))
+        }
+    }
+    
+    #Vent3
+    if(E:shootPos():distance(Vent3:pos())<70){
+        if(changed(E:keyJump())&E:keyJump()){
+            E:plySetPos(Vent3:toWorld(vec(0,0,0))+vec(0,0,20))
+        }
+        if(changed(E:keySprint())&E:keySprint()){
+            E:plySetPos(Vent3:toWorld(vec(0,0,0))+vec(0,0,-80))
+        }
+        if(changed(E:keyJump()||E:keySprint())&E:keyJump()||E:keySprint()){
+            timer("open3",100)
+        }
+    }
+    if(E:shootPos():distance(Vent3:pos())<20){
+        if(changed(E:keyRight())&E:keyRight()){
+            E:plySetPos(Vent1:toWorld(vec(0,0,0))+vec(0,0,-80))
+        }
+        if(changed(E:keyLeft())&E:keyLeft()){
+            E:plySetPos(Vent2:toWorld(vec(0,0,0))+vec(0,0,-80))
+        }
+    }
+    
+}
+if(clk("open1")){
+    Open1=1
+}
+if(Open1==1){
+    if(Close1==0){
+    if(Val1<100){
+        Val1=Val1+100/3
+    }
+    }
+    if(Val1>99){
+        Close1=1
+    }
+    if(Close1==1){
+    if(Val1>0){
+        Val1=Val1-100/3
+    }
+    if(Val1<1){
+        Close1=0
+        Open1=0
+        Val1=0
+    }
+    }
+    holoAng(2,holoEntity(1):toWorld(ang(Val1*1.6,0,0)))
+}
+
+if(clk("open2")){
+    Open2=1
+}
+if(Open2==1){
+    if(Close2==0){
+    if(Val2<100){
+        Val2=Val2+100/3
+    }
+    }
+    if(Val2>99){
+        Close2=1
+    }
+    if(Close2==1){
+    if(Val2>0){
+        Val2=Val2-100/3
+    }
+    if(Val2<1){
+        Close2=0
+        Open2=0
+        Val2=0
+    }
+    }
+    holoAng(5,holoEntity(4):toWorld(ang(Val2*1.6,0,0)))
+}
+
+if(clk("open3")){
+    Open3=1
+}
+if(Open3==1){
+    if(Close3==0){
+    if(Val3<100){
+        Val3=Val3+100/3
+    }
+    }
+    if(Val3>99){
+        Close3=1
+    }
+    if(Close3==1){
+    if(Val3>0){
+        Val3=Val3-100/3
+    }
+    if(Val3<1){
+        Close3=0
+        Open3=0
+        Val3=0
+    }
+    }
+    holoAng(8,holoEntity(7):toWorld(ang(Val3*1.6,0,0)))
+}
