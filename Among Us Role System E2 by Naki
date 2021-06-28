@@ -27,8 +27,10 @@ Impostor2=Players[Val2,entity]
 foreach(I,E:entity=Players){
     if(!(E==Impostor1|E==Impostor2)){
         #Crewmate
+        
     }else{
         #Impostor
+        
     }
 }
 }
